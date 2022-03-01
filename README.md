@@ -37,5 +37,22 @@ Docker WSL2/Linux subsystem on windows
 ### Docker docs
 - `docker run -d -p 4000:4000 docs/docker.github.io`. Once this is running, go to the browser and paste `localhost:4000` to see the official docker docs page which is running on a container
 
+#### Hosting static website with Nginx using docker
+- copy the index.html from localhost
+- to default location of nginx
+- `cd /usr/share/nginx/html/
+
+Solution
+- from the folder directory that has our index.html file, use `sudo docker cp index.html <containerid>:/usr/share/nginx/html/index.html`
 
 
+#### Docker Images
+- use `sudo docker login` from the ubuntu terminal with ur credentials
+- Now got to you docker hub account and clcik on create repository
+![Image Link](https://github.com/vivrk2989/micro-services-docker-k8/blob/main/Images/dcoker%20create%20repository.png)
+- name the repository 
+- then come back to the terminal and do `sudo docker ps` to get the `Conatiner ID` and `Name` like below
+![Image Link](https://github.com/vivrk2989/micro-services-docker-k8/blob/main/Images/Image%20id%20and%20name.png)
+- now to commit, use `sudo docker commit <containername-or-id> <nameit>`
+- use `sudo docker tag <containername/id> <username>/<reponame>`
+- then push it using `sudo docker push <username>/<reponame>`
