@@ -120,6 +120,6 @@ EXPOSE 3000
 CMD ["node", "app.js"]
 ```
 - run docker using `sudo docker run -d -p 80:3000 vivrk2989/docker_app`
-- docker commit <image-id> <username>/<repo-name>:<tag-name>
-- docker push <username>/<repo-name>:<tag-name>
+- docker commit `<image-id> <username>/<repo-name>:<tag-name>`
+- docker push `<username>/<repo-name>:<tag-name>`
 
