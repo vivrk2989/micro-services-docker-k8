@@ -123,16 +123,51 @@ CMD ["node", "app.js"]
 - docker commit `<image-id> <username>/<repo-name>:<tag-name>`
 - docker push `<username>/<repo-name>:<tag-name>`
 
-#### Build procudtion ready - Multi-stage build
+#### Build procdution ready - Multi-stage build
 - current image is in working state
 - listening on required port - EXPOSE 3000
 - copy app folder
 - npm install
-- npm install express
+- npm install express - might need it sometimes 
 - CDM [node, app.js]
 - `localhost:3000` displays node-app-home-page
 - add production ready layer
 - find the slimmer/smaller size of image to use `docker hub`
 - create alias app for our base image as 
-- --from=app path of WRKDIR PATH:new image WORKDIR
+- --from=app path of WORKDIR PATH:new image WORKDIR
 - size `105gb` to `250mb` approx
+
+```
+FROM node:latest as APP
+
+WORKDIR /usr/src/app
+
+COPY /app /usr/src/app/ 
+
+#EXPOSE 3000
+
+#CMD ["node", "app.js"]
+
+FROM node:alpine
+
+COPY --from=app /usr/src/app /usr/src/app
+# This is the magic line that compresses the size
+
+WORKDIR /usr/src/app
+
+# define the port
+
+EXPOSE 3000
+
+# start the app with CMD
+
+CMD ["node","app.js"]
+```
+
+- This will help us compress the image that we created earlier for our application making it easier to transfer and deploy.
+- other benefits: lightweight, faster, uptime, response time
+
+### Copying from container to localhost
+- Use `sudo docker cp <ImageName>:/usr/src/app new_app_data/` to copy the contents of the container to our local host folder - `new_app_data`
+
+
