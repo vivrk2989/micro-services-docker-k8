@@ -123,3 +123,16 @@ CMD ["node", "app.js"]
 - docker commit `<image-id> <username>/<repo-name>:<tag-name>`
 - docker push `<username>/<repo-name>:<tag-name>`
 
+#### Build procudtion ready - Multi-stage build
+- current image is in working state
+- listening on required port - EXPOSE 3000
+- copy app folder
+- npm install
+- npm install express
+- CDM [node, app.js]
+- `localhost:3000` displays node-app-home-page
+- add production ready layer
+- find the slimmer/smaller size of image to use `docker hub`
+- create alias app for our base image as 
+- --from=app path of WRKDIR PATH:new image WORKDIR
+- size `105gb` to `250mb` approx
